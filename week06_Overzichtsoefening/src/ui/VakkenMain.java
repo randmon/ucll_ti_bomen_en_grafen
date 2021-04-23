@@ -1,5 +1,6 @@
 package ui;
 
+import domain.model.BinaryMaxHeap;
 import domain.model.Vak;
 
 public class VakkenMain {
@@ -13,9 +14,21 @@ public class VakkenMain {
         Vak pd = new Vak("Probleemoplossend Denken", 3);
 
 
-        System.out.println("Dit vak moet je eerst studeren: " + "...");
-        System.out.println("Dit vak moet je nu studeren: " + "...");
+        BinaryMaxHeap<Vak> heap = new BinaryMaxHeap<>();
+        heap.addValue(bop);
+        heap.addValue(oop);
+        heap.addValue(algo);
+        heap.addValue(web1);
+        heap.addValue(web2);
+        heap.addValue(pd);
+
+        System.out.println("Dit vak moet je eerst studeren: " + heap.getMax());
+
+        System.out.println("Aan het studeren: " + heap.removeGreatest());
+
+        System.out.println("Dit vak moet je nu studeren: " + heap.getMax());
         System.out.println("Deze vakken moet ik nog allemaal studeren: ");
+        heap.print();
 
     }
 

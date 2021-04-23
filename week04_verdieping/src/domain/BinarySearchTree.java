@@ -7,7 +7,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	public BinarySearchTree(E data, BinarySearchTree<E> leftTree, BinarySearchTree<E> rightTree) {
 		super(data, leftTree, rightTree);
 	}
-
+			
 	public BinarySearchTree(E data) {
 		super(data);
 	}
@@ -100,4 +100,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		path.add(0, this.data);
 		return path;
 	}
+
 }
+
+

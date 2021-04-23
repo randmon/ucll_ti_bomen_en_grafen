@@ -1,9 +1,8 @@
-package domain;
-import java.lang.reflect.Array;
+package domain.model;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BinaryMinHeap<E extends Comparable<E>> {
+public class BinaryMaxHeap<E extends Comparable<E>> {
     private ArrayList<E> values;
 
     private boolean isEmpty() {
@@ -17,7 +16,7 @@ public class BinaryMinHeap<E extends Comparable<E>> {
             System.out.println(values);
     }
 
-    public E getMin() {
+    public E getMax() {
         if (this.isEmpty()) throw new IllegalStateException("Kan niet zoeken in een lege heap");
         return values.get(0);
     }
@@ -43,7 +42,7 @@ public class BinaryMinHeap<E extends Comparable<E>> {
             int parentIndex = getParentIndex(addedIndex);
             E parent = values.get(parentIndex);
             int result = parent.compareTo(added);
-            if (result > 0) {
+            if (result < 0) {
                 Collections.swap(values, parentIndex, addedIndex);
                 addedIndex = parentIndex;
             } else return;
@@ -62,9 +61,9 @@ public class BinaryMinHeap<E extends Comparable<E>> {
         return (int) Math.floor(Math.log(index+1)/ Math.log(2));
     }
 
-    public E removeSmallest() {
+    public E removeGreatest() {
         if (isEmpty()) throw new IllegalStateException("Kan niets verwijderen uit een lege boom");
-        E res = getMin();// res bevat de kleinste = eerste element van de lijst
+        E res = getMax();// res bevat de grootste = eerste element van de lijst
         values.set(0, values.get(values.size() - 1));// verwissel eerste met de laatste
         values.remove(values.size() - 1); // verwijder de laatste
         bubbleDown(); // bubble down van eerste naar beneden zie theorie
@@ -90,15 +89,15 @@ public class BinaryMinHeap<E extends Comparable<E>> {
                 int rightResult = rightChild.compareTo(swapped);
 
                 //compare left and right children, choose smallest
-                if (rightResult < 0 && leftChild.compareTo(rightChild) > 0) {
+                if (rightResult > 0 && leftChild.compareTo(rightChild) < 0) {
                     Collections.swap(values, swappedIndex, leftChildIndex+1);
                     swappedIndex = leftChildIndex+1;
-                } else if (leftResult < 0) {
+                } else if (leftResult > 0) {
                     //swap with left child
                     Collections.swap(values, swappedIndex, leftChildIndex);
                     swappedIndex = leftChildIndex;
                 }
-            } else if (leftResult < 0) {
+            } else if (leftResult > 0) {
                 //swap with left child
                 Collections.swap(values, swappedIndex, leftChildIndex);
                 swappedIndex = leftChildIndex;

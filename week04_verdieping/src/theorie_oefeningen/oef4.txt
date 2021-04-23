@@ -1,0 +1,12 @@
+Men zoekt in een BST van gehele getallen naar het getal 43.
+Men doorloopt zo een aantal knopen en het zesde getal is 43. Welke van volgende rijen van
+getallen zijn niet mogelijk als lijst van opeenvolgende knopen die men bekomt als resultaat
+van de zoektocht? Geef een duidelijke uitleg waarom je antwoord(en) niet kan (kunnen).
+
+    1. 61, 52, 14, 17, 40, 43   - Kan wel
+    2. 2, 3, 50, 40, 60, 43     - Kan niet: 60 is groter dan 50, dus het kan geen kind van 40 zijn
+                                        - (60 moest kind zijn van een node met een getal groter dan 50)
+    3. 10, 65, 31, 48, 37, 43   - Kan wel
+    4. 81, 61, 52, 14, 41, 43   - Kan wel
+    5. 17, 77, 27, 66, 18, 43   - Kan niet: 18 is kleiner dan 27, dus het kan geen kind van 66 zijn
+                                        - (18 moest kind zijn van een node met een getal tussen 17 en 27)

@@ -1,0 +1,20 @@
+(Examenvraag augustus 2019) Je weet wat een complete binaire boom is. Een strikt
+binaire boom wordt gedefinieerd als een binaire boom waar elke knoop, met uitzondering
+van de bladeren, exact twee kinderen heeft. Je krijgt nu 5 stellingen over beide bomen. Welke
+van de 5 stellingen is juist? Geef bij elke stelling die je af- of goedkeurt een duidelijke uitleg mbv
+een figuur.
+
+1. Elke binaire boom is ofwel compleet ofwel strikt.
+        - Fout. Elke complete binaire boom is ook strikt
+
+2. Elke complete binaire boom is ook een strikt binaire boom.
+        - Juist. Bij elke binaire boom hebben alle nodes (behalve bladeren) 2 kinderen
+
+3. Elke strikt binaire boom is ook een complete binaire boom.
+        -Fout. Een strikt BB zegt niets over de bladeren. Bij een complete BB moeten de bladeren naar links zijn
+
+4. Een binaire boom kan nooit tegelijk compleet en strikt zijn.
+        - Fout. Uitleg gegeven bij zin 2. Elke complete BB is ook een strikt BB
+
+5. Geen enkele van bovenstaande zinnen is juist.
+        - Fout. Zin 2 is juist

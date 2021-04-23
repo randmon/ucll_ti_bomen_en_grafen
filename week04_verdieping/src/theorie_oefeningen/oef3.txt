@@ -1,0 +1,14 @@
+preorder:
+    Bezoek de knoop
+    Wandel door de linkersubboom
+    Wandel door de rechtersubboom
+
+    30, 20, 10, 15, 25, 23, 39, 35, 42
+    see img1.png
+
+postorder:
+    Wandel door de linkersubboom
+    Wandel door de rechtersubboom
+    Bezoek de knoop
+
+    15, 10, 23, 25, 20, 35, 42, 39, 30
