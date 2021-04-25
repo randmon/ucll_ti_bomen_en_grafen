@@ -6,8 +6,21 @@ public class FloydUI {
 	static final double infty = WeightedGraph.infty;
 	public static void main(String[] args) {
 		
-		double [][] matrix = {{0,1,infty,1,5},{9,0,3,2,infty},{infty,infty, 0, 4, infty},{infty,infty,2,0,3},{3,infty,infty,infty,0}};
-		//double[][] matrix = {{0,2,3,11,infty},{infty,0,infty,7,infty},{infty,infty,0,4,infty},{infty,infty,infty,0,1},{infty,infty,infty,infty,0}};
+		double [][] matrix = {
+				{0,		1,		infty,	1,		5},
+				{9,		0,		3,		2,		infty},
+				{infty,	infty,	0, 		4,		infty},
+				{infty,	infty,	2,		0,		3},
+				{3,		infty,	infty,	infty,	0}
+		};
+
+		/*double[][] matrix = {
+				{0,		2,		3,		11,		infty},
+				{infty,	0,		infty,	7,		infty},
+				{infty,	infty,	0,		4,		infty},
+				{infty,	infty,	infty,	0,		1},
+				{infty,	infty,	infty,	infty,	0}
+		};*/
 		
 		printDoubleMatrix(matrix);
 		
