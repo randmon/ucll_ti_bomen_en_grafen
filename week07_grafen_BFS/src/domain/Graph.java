@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -9,9 +10,7 @@ public class Graph {
     public static final int infty = Integer.MAX_VALUE;
 
     public Graph(int[][] matrix) {
-        if (!isGeldigeVerbindingsMatrix(matrix))
-            throw new IllegalArgumentException("No valid verbindingsmatrix");
-
+        if (!isGeldigeVerbindingsMatrix(matrix)) throw new IllegalArgumentException("No valid verbindingsmatrix");
         this.verbindingsMatrix = matrix.clone();
     }
 
@@ -23,9 +22,9 @@ public class Graph {
             if (matrix[i][i] != 0)
                 return false;
 
-        for (int i = 0; i < matrix.length; i++)
+        for (int[] ints : matrix)
             for (int j = 0; j < matrix.length; j++)
-                if (matrix[i][j] != 0 && matrix[i][j] != 1)
+                if (ints[j] != 0 && ints[j] != 1)
                     return false;
         return true;
     }
@@ -34,21 +33,39 @@ public class Graph {
         return this.verbindingsMatrix.length;
     }
 
-    private int[] findAncestors(int start, int destination) {// nummering van
-        // start-knoop
-        // (1..aantal_knopen)
-        // naar
-        // eindKnoop
-        // (destination)
-        int[] ancestors = new int[this.getAantalKnopen()];
+    private boolean areConnected(int from, int to) {
+        return this.verbindingsMatrix[from-1][to-1] == 1;
+    }
+
+    private int[] findAncestors(int start, int destination) {
+        int aantalKnopen = getAantalKnopen();
+        int[] ancestors = new int[aantalKnopen];
         initArray(ancestors, infty);
 
         Queue<Integer> queue = new LinkedList<>();
-        // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Queue.html
         queue.add(start);
         ancestors[start - 1] = 0;
 
-        // oefening 1.4
+        int huidig = queue.remove();
+        while (huidig != destination) {
+            //Zoek alle nog niet bezochte knopen vanuit huidig
+            for (int i = 1; i <= aantalKnopen; ++i) {
+                if (areConnected(huidig, i) && (ancestors[i-1] == infty)) {
+                    //voeg knoop i toe aan queue
+                    queue.add(i);
+
+                    //duid aan dat huidig de ouder is van i in ancestormatrix
+                    ancestors[i-1] = huidig;
+                }
+            }
+
+            //voorste element van queue wordt nieuwe huidige knoop
+            if (!queue.isEmpty()) {
+                huidig = queue.poll();
+            } else {
+                break;
+            }
+        }
 
         return ancestors;
     }
@@ -60,15 +77,19 @@ public class Graph {
         int[] ancestors = this.findAncestors(start, destination);
         List<Integer> path = new LinkedList<>();
 
-        // oefening 1.5
+        int ouder = ancestors[destination-1];
+        while (ouder != 0 && ouder != infty) {
+            path.add(0, destination);
+            destination = ouder;
+            ouder = ancestors[destination-1];
+        }
 
+        if (ouder == 0) path.add(0, destination);
         return path;
-
     }
 
     private void initArray(int[] array, int value) {
-        for (int i = 0; i < array.length; i++)
-            array[i] = value;
+        Arrays.fill(array, value);
     }
 
 
@@ -76,11 +97,13 @@ public class Graph {
     public String geefAncestors(int start, int destination) {
         String res = "Ancestors van " + start + " naar " + destination + ":\n";
         int[] ancestors = this.findAncestors(start, destination);
-        for (int a = 0; a < ancestors.length; a++)
-            res += ancestors[a] != infty ? ancestors[a] : "infty" + " ";
-
+        for (int ancestor : ancestors) {
+            res += ancestor != infty ? ancestor + " " : "infty" + " ";
+        }
         return res;
     }
 
-
+    public int[][] getVerbindingsMatrix() {
+        return verbindingsMatrix;
+    }
 }

@@ -8,7 +8,7 @@ public class BreadthFirstSearchUI {
 
 	public static void main(String[] args) {
 
-		int data[][] = { 	{ 0, 1, 0, 1, 0, 0, 0 }, 
+		int[][] data = { 	{ 0, 1, 0, 1, 0, 0, 0 },
 							{ 0, 0, 1, 0, 0, 0, 0 }, 
 							{ 1, 0, 0, 1, 1, 0, 0 },
 							{ 0, 0, 0, 0, 1, 1, 0 }, 
@@ -32,10 +32,11 @@ public class BreadthFirstSearchUI {
 		System.out.println(zetPadOmNaarString(start, destination, bfs.findPath(start, destination)));
 	}
 
-	private static String zetPadOmNaarString(int start, int destination, List<Integer> path) {
+	public static String zetPadOmNaarString(int start, int destination, List<Integer> path) {
 		if (path.size() == 0)
 			return "Er is geen pad van " + start + " naar " + destination;
 		else
-			return "Kortste pad van " + start + " naar "+ destination + " is " + path.size() + " knopen lang en bestaat uit volgende knopen  : " + path;
+			return "Kortste pad van " + start + " naar "+ destination + " (length = " + path.size()
+					+ "): " + path;
 	}
 }
