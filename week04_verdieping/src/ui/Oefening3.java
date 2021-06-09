@@ -7,7 +7,6 @@ public class Oefening3 {
         BinarySearchTree<Integer> boom = new BinarySearchTree<>(30);
         boom.addNode(20);
         boom.addNode(39);
-        boom.addNode(20);
         boom.addNode(10);
         boom.addNode(15);
         boom.addNode(25);
@@ -18,8 +17,9 @@ public class Oefening3 {
 
         System.out.println("Preorder:");
         boom.printPreorder();
-        System.out.println("\n");
-        System.out.println("Postorder:");
+        System.out.println("\nPostorder:");
         boom.printPostorder();
+        System.out.println("\nInorder");
+        boom.printInorder();
     }
 }
