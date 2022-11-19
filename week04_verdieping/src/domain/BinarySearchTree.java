@@ -3,11 +3,6 @@ package domain;
 import java.util.ArrayList;
 
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
-
-	public BinarySearchTree(E data, BinarySearchTree<E> leftTree, BinarySearchTree<E> rightTree) {
-		super(data, leftTree, rightTree);
-	}
-			
 	public BinarySearchTree(E data) {
 		super(data);
 	}
@@ -30,13 +25,15 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			if (leftTree == null) {
 				leftTree = new BinarySearchTree<>(data);
 				return true;
-			} return leftTree.addNode(data);
+			}
+			return leftTree.addNode(data);
 		}
 		else {
 			if (rightTree == null) {
 				rightTree = new BinarySearchTree<>(data);
 				return true;
-			} return rightTree.addNode(data);
+			}
+			return rightTree.addNode(data);
 		}
 	}
 
@@ -49,21 +46,19 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			if (this.isLeaf()) {
 				this.data = null;
 			} else if (leftTree != null) {
-				E grootsteLinks = leftTree.searchGreatest();
-				this.data = grootsteLinks;
-				leftTree.removeNode(grootsteLinks);
+				E greatestLeft = leftTree.searchGreatest();
+				this.data = greatestLeft;
+				leftTree.removeNode(greatestLeft);
 			} else {
-				E kleinsteRechts = rightTree.searchSmallest();
-				this.data = kleinsteRechts;
-				rightTree.removeNode(kleinsteRechts);
+				E smallestRight = rightTree.searchSmallest();
+				this.data = smallestRight;
+				rightTree.removeNode(smallestRight);
 			}
 			deleted = true;
-		}
-		else if (result < 0) {
+		} else if (result < 0) {
 			if (leftTree == null) return false;
 			deleted = leftTree.removeNode(data);
-		}
-		else if (rightTree == null) return false;
+		} else if (rightTree == null) return false;
 		else deleted = rightTree.removeNode(data);
 
 		if (deleted) cleanUp();

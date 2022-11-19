@@ -164,19 +164,19 @@ public class RecursieTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testOef9_FindMaximum_Lege_lijst_gooit_exception() {
-		Recursie.findMaximum(new ArrayList<Double>());
+		Recursie.findMaximum(new ArrayList<>());
 	}
 	
 	@Test
 	public void testOef9_FindMaximum_lijst_Met_1_Element_Geeft_Element() {
-		ArrayList<Double> lijst = new ArrayList<Double>();
+		ArrayList<Double> lijst = new ArrayList<>();
 		lijst.add(-5.5);
 		assertEquals(-5.5,Recursie.findMaximum(lijst),0.1);
 	}
 	
 	@Test
 	public void testOef9_FindMaximum_lijst_Met_Meer_Elementen_Geeft_Grootste() {
-		ArrayList<Double> lijst = new ArrayList<Double>();
+		ArrayList<Double> lijst = new ArrayList<>();
 		lijst.add(-5.5);
 		lijst.add(1.1);
 		lijst.add(1.0);
@@ -251,6 +251,4 @@ public class RecursieTest {
 	public void testOef11_aantalKaarten_negatief_gooit_exception() {
 		Recursie.aantalKaarten(-10);
 	}
-	
-	
 }

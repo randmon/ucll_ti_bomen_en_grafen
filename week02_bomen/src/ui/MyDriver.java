@@ -15,26 +15,31 @@ public class MyDriver {
         BinaryTree<String> nodeB = new BinaryTree<>("B", nodeA, nodeD);
         BinaryTree<String> nodeG = new BinaryTree<>("G", null, nodeI);
 
-        BinaryTree<String> boom = new BinaryTree<>("F", nodeB, nodeG);
+        BinaryTree<String> tree = new BinaryTree<>("F", nodeB, nodeG);
 
-        System.out.print("pre order: ");
-        boom.printPreorder();
+        print("pre order: ");
+        tree.printPreorder();
 
-        System.out.print("\nin order: ");
-        boom.printInorder();
+        print("\nin order: ");
+        tree.printInorder();
 
-        System.out.print("\npost order: ");
-        boom.printPostorder();
+        print("\npost order: ");
+        tree.printPostorder();
 
-        System.out.println("\ncount: " + boom.countNodes());
-        System.out.println("depth: " + boom.getDepth());
+        print("\ncount: " + tree.countNodes());
+        print("depth: " + tree.getDepth());
 
-        System.out.print("leaves: " + boom.countLeaves() + " - ");
-        boom.getDataLeaves().forEach(System.out::print);
-        System.out.println("\n");
-        System.out.println(boom.contains("D"));
-        System.out.println(boom.contains("H"));
-        System.out.println(boom.contains("F"));
-        System.out.println(boom.contains("Q"));
+        System.out.print("leaves: " + tree.countLeaves() + " - ");
+        tree.getDataLeaves().forEach(System.out::print);
+        print("\n");
+
+        print("Tree contains 'D': " + tree.contains("D"));
+        print("Tree contains 'H': " + tree.contains("H"));
+        print("Tree contains 'F': " + tree.contains("F"));
+        print("Tree contains 'Q': " + tree.contains("Q"));
+    }
+
+    public static void print(Object o) {
+        System.out.println(o);
     }
 }

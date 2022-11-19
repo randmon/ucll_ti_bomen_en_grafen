@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeightedGraph {
-	private final double[][] gewichtenMatrix;
+	private final double[][] weightMatrix;
 	public final static double infty = Double.POSITIVE_INFINITY;
 
     public WeightedGraph(double[][] matrix) {
-        if (!isGeldigeGewichtenmatrix(matrix))
-            throw new IllegalArgumentException("No valid gewichtenmatrix");
-        this.gewichtenMatrix = matrix;
+        if (!isValidWeightMatrix(matrix))
+            throw new IllegalArgumentException("No valid weight matrix");
+        this.weightMatrix = matrix;
     }
 
-    private boolean isGeldigeGewichtenmatrix(double[][] matrix) {
+    private boolean isValidWeightMatrix(double[][] matrix) {
         return matrix != null && matrix.length == matrix[0].length;
     }
 
     private int getAantalKnopen() {
-        return gewichtenMatrix.length;
+        return weightMatrix.length;
     }
 
     public int[][] getPointerMatrix() {
@@ -26,7 +26,7 @@ public class WeightedGraph {
         int[][] P = new int[aantalKnopen][aantalKnopen];
         double[][] D = new double[aantalKnopen][];
         for (int k = 0; k < aantalKnopen; ++k) {
-            D[k] = this.gewichtenMatrix[k].clone();
+            D[k] = this.weightMatrix[k].clone();
         }
 
         //elke knoop toevoegen als tussenstation
@@ -47,27 +47,27 @@ public class WeightedGraph {
 	}
 
 	public List<Integer> getShortestPath(int from, int to, int[][] P) {
-		List<Integer> pad = new ArrayList<>();
-		if (from == to) return pad;
+		List<Integer> path = new ArrayList<>();
+		if (from == to) return path;
 
 		int h = P[from-1][to-1];
         if (h == 0) {
-            pad.add(from);
-            pad.add(to);
+            path.add(from);
+            path.add(to);
         } else {
 
-            pad = getShortestPath(from, h, P);
-            pad.remove(pad.size()-1);
-            pad.addAll(getShortestPath(h, to, P));
+            path = getShortestPath(from, h, P);
+            path.remove(path.size()-1);
+            path.addAll(getShortestPath(h, to, P));
         }
-		return pad;
+		return path;
 
 	}
 
-	public int berekenLengte(List<Integer> pad) {
+	public int calculateLength(List<Integer> path) {
 		int som = 0;
-		for (int i = 1; i < pad.size(); ++i) {
-		    som += gewichtenMatrix[pad.get(i-1)-1][pad.get(i)-1];
+		for (int i = 1; i < path.size(); ++i) {
+		    som += weightMatrix[path.get(i-1)-1][path.get(i)-1];
         }
 		return som;
 	}

@@ -2,19 +2,11 @@ package ui;
 
 import domain.BinaryMinHeap;
 
+import static ui.BinaryMinHeapDriver.weekFiveTree;
+
 public class Main {
     public static void main(String[] args) {
-        BinaryMinHeap<Integer> heap = new BinaryMinHeap<>();
-        heap.addValue(3);
-        heap.addValue(2);
-        heap.addValue(1);
-        heap.addValue(0);
-        heap.addValue(-1);
-        heap.addValue(-2);
-        heap.addValue(-4);
-        heap.addValue(2);
-        heap.addValue(-7);
-        heap.print();
+        BinaryMinHeap<Integer> heap = weekFiveTree();
 
         for (int i = 1 ; i <= 2; i++){
             System.out.println(heap.removeSmallest());

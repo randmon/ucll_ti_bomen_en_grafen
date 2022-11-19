@@ -3,8 +3,8 @@ package domain;
 import java.util.ArrayList;
 
 public class BinaryTree<E>{
-	E data;
-	BinaryTree<E> leftTree, rightTree;
+	protected E data;
+	protected BinaryTree<E> leftTree, rightTree;
 	
 	public BinaryTree(E data){
 		this(data,null,null);

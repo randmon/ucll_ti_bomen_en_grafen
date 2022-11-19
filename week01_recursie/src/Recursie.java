@@ -3,8 +3,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Recursie {
-
-
     // Oefening 1: n-de Fibonacci-getal
     //Very inneficient because we need to calculate many branches to add them together
     public static int fibonacci(int getal) {
@@ -14,7 +12,6 @@ public class Recursie {
     }
 
     // Oefening 2 : som van cijfers
-
     public static int somVanCijfers(int getal) {
         if (getal < 0) return somVanCijfers(Math.abs(getal));
         if (getal < 10) return getal;
@@ -29,7 +26,6 @@ public class Recursie {
     }
 
     //oefening 4: countX
-
     public static int countX(String s) {
         if (s == null) throw new IllegalArgumentException();
         if (s.length() == 0) return 0;
@@ -99,6 +95,6 @@ public class Recursie {
     public static int aantalKaarten(int n) {
         if (n <= 0) throw new IllegalArgumentException();
         if (n == 1) return 2;
-        return 2*n + n - 1 + aantalKaarten(n-1);
+        return 2 * n + n - 1 + aantalKaarten(n-1);
     }
 }

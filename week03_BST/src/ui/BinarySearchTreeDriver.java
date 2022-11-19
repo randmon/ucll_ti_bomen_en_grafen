@@ -3,45 +3,42 @@ package ui;
 import 	domain.BinarySearchTree;
 
 public class BinarySearchTreeDriver {
-
 	public static void main(String[] args) {
-		BinarySearchTree<Integer> boom = new BinarySearchTree<>(6);
-		boom.addNode(4);
-		boom.addNode(8);
-		boom.addNode(3);
-		boom.addNode(5);
-		boom.addNode(7);
-		boom.addNode(9);
-		boom.addNode(10);
-		boom.addNode(11);
-		printBoomInfo(boom);
+		BinarySearchTree<Integer> tree = new BinarySearchTree<>(6);
+		tree.addNode(4);
+		tree.addNode(8);
+		tree.addNode(3);
+		tree.addNode(5);
+		tree.addNode(7);
+		tree.addNode(9);
+		tree.addNode(10);
+		tree.addNode(11);
+		printTreeInfo(tree);
 
-		System.out.println();
-		printBoolean("Remove 9: ", boom.removeNode(9));
-		printBoolean("Remove 11: ", boom.removeNode(11));
-		printBoolean("Remove 6: ", boom.removeNode(6));
-		printBoomInfo(boom);
+		print("Remove 9: " + tree.removeNode(9));
+		print("Remove 11: " + tree.removeNode(11));
+		print("Remove 6: " + tree.removeNode(6));
+		printTreeInfo(tree);
 
-		System.out.println(boom.getPath(1000));
-		System.out.println(boom.getPath(7));
-		System.out.println(boom.getPath(4));
-		System.out.println(boom.getPath(8));
+		print("Path to 1000: " + tree.getPath(1000));
+		print("Path to 7: " + tree.getPath(7));
+		print("Path to 4: " + tree.getPath(4));
+		print("Path to 8: " + tree.getPath(8));
 	}
 
-	private static void printBoomInfo(BinarySearchTree<Integer> boom) {
-		if (boom == null) System.out.println("Lege boom");
+	private static void printTreeInfo(BinarySearchTree<Integer> boom) {
+		if (boom == null) print("Lege boom");
 		else {
-			System.out.println("\n");
+			print("\n");
 			boom.printInorder();
-			System.out.println();
-			System.out.println("De grootste waarde uit deze boom = " + boom.searchGreatest());
-			System.out.println("De kleinste waarde uit deze boom = " + boom.searchSmallest());
-			System.out.println("Nodes: " + boom.countNodes());
+			print("\n");
+			print("De grootste waarde uit deze boom = " + boom.searchGreatest());
+			print("De kleinste waarde uit deze boom = " + boom.searchSmallest());
+			print("Nodes: " + boom.countNodes());
 		}
 	}
 
-	private static void printBoolean(String s, boolean b) {
-		System.out.print(s);
-		System.out.println(b);
+	private static void print(Object o) {
+		System.out.println(o);
 	}
 }

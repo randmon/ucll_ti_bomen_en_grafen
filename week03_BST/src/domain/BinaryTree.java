@@ -3,8 +3,8 @@ package domain;
 import java.util.ArrayList;
 
 public class BinaryTree<E>{
-	E data;
-	BinaryTree<E> leftTree, rightTree;
+	protected E data;
+	protected BinaryTree<E> leftTree, rightTree;
 
 	public BinaryTree(E data){
 		this(data,null,null);
@@ -62,11 +62,11 @@ public class BinaryTree<E>{
 		return false;
 	}
 
-	public E searchSmallest(){
+	public E searchSmallest() {
 		throw new UnsupportedOperationException("Should not be implemented, implement in BinarySearchTree file");
 	}
 
-	public E searchGreatest(){
+	public E searchGreatest() {
 		throw new UnsupportedOperationException("Should not be implemented, implement in BinarySearchTree file");
 	}
 

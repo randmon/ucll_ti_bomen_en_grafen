@@ -4,7 +4,6 @@ package ui;
 import domain.Graph;
 
 public class uiOefeningPunt1 {
-
 	public static void main(String[] args) {
 		int[][] m = {
 				{0,7,0,6,0,0,0,0},
@@ -20,8 +19,5 @@ public class uiOefeningPunt1 {
 		Graph g = new Graph(m);
 		
 		System.out.println(g.berekenPaden(3));
-		
-		
 	}
-
 }

@@ -5,9 +5,7 @@ import java.util.List;
 import domain.Graph;
 
 public class BreadthFirstSearchUI {
-
 	public static void main(String[] args) {
-
 		int[][] data = { 	{ 0, 1, 0, 1, 0, 0, 0 },
 							{ 0, 0, 1, 0, 0, 0, 0 }, 
 							{ 1, 0, 0, 1, 1, 0, 0 },

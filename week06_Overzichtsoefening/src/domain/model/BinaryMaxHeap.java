@@ -21,7 +21,7 @@ public class BinaryMaxHeap<E extends Comparable<E>> {
         return values.get(0);
     }
 
-    public boolean addValue(E value) {
+    public void addValue(E value) {
         // geen null toevoegen aan de heap
         if (value == null) throw new IllegalArgumentException();
         // indien de heap leeg is: eerst initialiseren
@@ -30,7 +30,6 @@ public class BinaryMaxHeap<E extends Comparable<E>> {
 
         values.add(value);//achteraan toevoegen
         bubbleUp();//bubbleUp vanaf de laatste zie slides theorie
-        return true;
     }
 
     private void bubbleUp() {

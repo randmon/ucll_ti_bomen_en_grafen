@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Graph {
-	private final int[][] gewichtenMatrix;
+	private final int[][] weightMatrix;
     private final int inf = Integer.MAX_VALUE;
 
 	public Graph(int[][] matrix) {
@@ -11,130 +11,127 @@ public class Graph {
 			throw new IllegalArgumentException();
 		}
 
-		this.gewichtenMatrix = matrix.clone();
+		this.weightMatrix = matrix.clone();
 	}
 
-    private int getAantalKnopen() {
-        return gewichtenMatrix.length;
+    private int countNodes() {
+        return weightMatrix.length;
     }
 
 
-	private int[][] initMatrixDijkstra(int vanKnoop) {
-		int lengte = getAantalKnopen();
-		// laatste rij is rij met kortste lengtes vanuit vanKnoop
-		int[][] res = new int[lengte + 1][lengte];
+	private int[][] initMatrixDijkstra(int fromNode) {
+		int length = countNodes();
+		// laatste rij is rij met kortste lengtes vanuit fromNode
+		int[][] result = new int[length + 1][length];
 		//Initialiseer laatste rij als "leeg"
-		for (int i = 0; i < lengte; ++i) {
-			res[lengte][i] = inf;
+		for (int i = 0; i < length; ++i) {
+			result[length][i] = inf;
 		}
 		//Kopieer matrix waardes
-		for (int rij = 0; rij < lengte; ++rij) {
-			for (int kolom = 0; kolom < lengte; ++kolom) {
-				int gewicht = gewichtenMatrix[rij][kolom];
-				res[rij][kolom] = gewicht < inf ? gewicht : 0;
+		for (int row = 0; row < length; ++row) {
+			for (int col = 0; col < length; ++col) {
+				int weight = weightMatrix[row][col];
+				result[row][col] = weight < inf ? weight : 0;
 			}
 		}
 		//Zet kolom van startknoop allemaal nullen
-		for (int i = 0; i < lengte+1; ++i) {
-			res[i][vanKnoop-1] = 0;
+		for (int i = 0; i < length+1; ++i) {
+			result[i][fromNode-1] = 0;
 		}
 
-		return res;
+		return result;
 	}
 
-	public int[][] dijkstra(int vanKnoop) {
-		int[][] res = initMatrixDijkstra(vanKnoop);
+	public int[][] dijkstra(int fromNode) {
+		int[][] result = initMatrixDijkstra(fromNode);
 		
-		System.out.println("Initiele matrix: \n");
-		printIntMatrix(res);
+		System.out.println("Initial matrix: \n");
+		printIntMatrix(result);
 
-		int lengte = getAantalKnopen();
-		for (int i = 0; i < lengte-1; ++i) {
+		int length = countNodes();
+		for (int i = 0; i < length-1; ++i) {
 			//zoek minimale afstand
 			int min = inf;
-			int[] knopenpaar = {inf, inf}; //index die het nieuwe minimum is
-			for (int j = 0; j < lengte; ++j) {
+			int[] nodePair = {inf, inf}; //index die het nieuwe minimum is
+			for (int j = 0; j < length; ++j) {
 				//herhaal voor alle knopen die al bezocht zijn
-				if (res[lengte][j] != inf) {
-					for (int k = 0; k < lengte; ++k) {
+				if (result[length][j] != inf) {
+					for (int k = 0; k < length; ++k) {
 						//als knoop k+1 nog niet gevonden is,
 						//als er een verbinding is tussen knoop j+1 en knoop k+1
 						//en als de verbinding tussen deze knopen korter is dan min
-						if (res[lengte][k] == inf
-								&& res[j][k] != 0
-								&& res[lengte][j] + res[j][k] < min) {
-							//Zet knopenpaar en min
-							knopenpaar[0] = j;
-							knopenpaar[1] = k;
-							min = res[lengte][j] + res[j][k];
+						if (result[length][k] == inf
+								&& result[j][k] != 0
+								&& result[length][j] + result[j][k] < min) {
+							//Zet nodePair en min
+							nodePair[0] = j;
+							nodePair[1] = k;
+							min = result[length][j] + result[j][k];
 						}
 					}
 				}
 			}
 			//Tussenresultaat wegschrijven indien er verbetering is
-			if (knopenpaar[0] != inf && knopenpaar[1] != inf) {
-				res[lengte][knopenpaar[1]] = min; //Zet kost onderaan
-				for (int j = 0; j < lengte; ++j) {
+			if (nodePair[0] != inf && nodePair[1] != inf) {
+				result[length][nodePair[1]] = min; //Zet kost onderaan
+				for (int j = 0; j < length; ++j) {
 					//Rest van kolom op 0 zetten
-					if (j != knopenpaar[0]) res[j][knopenpaar[1]] = 0;
+					if (j != nodePair[0]) result[j][nodePair[1]] = 0;
 				}
 			}
 		}
 
-
-		return res;
+		return result;
 	}
 
-	private ArrayList<Integer> vindPad(int vanKnoop, int naarKnoop, int[][] res) {
-		ArrayList<Integer> pad = new ArrayList<>();
-		pad.add(naarKnoop);
+	private ArrayList<Integer> findPath(int fromNode, int toNode, int[][] res) {
+		ArrayList<Integer> path = new ArrayList<>();
+		path.add(toNode);
 
-		int lengte = getAantalKnopen();
-		while (naarKnoop != vanKnoop) {
+		int lengte = countNodes();
+		while (toNode != fromNode) {
 			int k = 1;
-			while (k-1 < lengte && res[k-1][naarKnoop-1] == 0) k++;
-			pad.add(0, k);
-			naarKnoop = k;
+			while (k-1 < lengte && res[k-1][toNode-1] == 0) k++;
+			path.add(0, k);
+			toNode = k;
 		}
-		return pad;
+		return path;
 	}
 
-	public String berekenPaden(int vanKnoop) {
-        String uit = "";
-        int[][] res = this.dijkstra(vanKnoop);
+	public String berekenPaden(int fromNode) {
+        StringBuilder uit = new StringBuilder();
+        int[][] res = this.dijkstra(fromNode);
 
-        System.out.println("Resulterende matrix: \n");
+        System.out.println("Result matrix: \n");
         printIntMatrix(res);
 
-        for (int i = 0; i < getAantalKnopen(); i++) {
-            if ((i + 1) != vanKnoop) {
-                if (res[getAantalKnopen()][i] == Integer.MAX_VALUE) {
-                    uit += "Er is geen pad van " + vanKnoop + " naar " + (i + 1) + "\n";
+        for (int i = 0; i < countNodes(); i++) {
+            if ((i + 1) != fromNode) {
+                if (res[countNodes()][i] == Integer.MAX_VALUE) {
+                    uit.append("There is no path from ").append(fromNode).append(" to ").append(i + 1).append("\n");
                 } else {
-                    uit += "Kortste afstand van " + vanKnoop + " naar " + (i + 1) + " = " + res[getAantalKnopen()][i] + "\n";
-                    uit += "via ";
+                    uit.append("Shortest distance from ").append(fromNode).append(" to ").append(i + 1).append(" = ").append(res[countNodes()][i]).append("\n");
+                    uit.append("via ");
 
                     int j = (i + 1);
-                    ArrayList<Integer> pad = vindPad(vanKnoop, j, res);
-                    uit += pad + "\n";
+                    ArrayList<Integer> pad = findPath(fromNode, j, res);
+                    uit.append(pad).append("\n");
                 }
             }
         }
 
-		return uit;
+		return uit.toString();
 	}
 	
 	private static void printIntMatrix(int[][] matrix) {
-		String result ="";
-		for (int[] rij : matrix) {
+		StringBuilder result = new StringBuilder();
+		for (int[] row : matrix) {
 			for (int j = 0; j < matrix[0].length; j++) {
-				result += (rij[j] == Integer.MAX_VALUE ? "inf" : rij[j]) + "\t";
+				result.append(row[j] == Integer.MAX_VALUE ? "inf" : row[j]).append("\t");
 			}
-			result += "\n";
+			result.append("\n");
 		}
-		result += "\n";
-		
+		result.append("\n");
 		System.out.println(result);		
 	}
-
 }

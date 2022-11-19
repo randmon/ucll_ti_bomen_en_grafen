@@ -4,8 +4,8 @@ import java.util.List;
 import domain.WeightedGraph;
 public class FloydUI {
 	static final double infty = WeightedGraph.infty;
+	
 	public static void main(String[] args) {
-		
 		double [][] matrix = {
 				{0,		1,		infty,	1,		5},
 				{9,		0,		3,		2,		infty},
@@ -28,44 +28,44 @@ public class FloydUI {
 		int[][] p_matrix = g.getPointerMatrix();
 		printIntMatrix(p_matrix);
 		
-		String result = "Kortste paden: \n";
+		StringBuilder result = new StringBuilder("Shortest paths:\n");
 		for (int i = 1; i <= matrix.length; i++) {
 			for (int j = 1; j <= matrix.length; j++) {
-				List<Integer> pad = g.getShortestPath(i, j, p_matrix);
+				List<Integer> path = g.getShortestPath(i, j, p_matrix);
 				
-				if (pad.size() == 0)
-					result += "Er is geen pad van " + i + " naar " + j  + "\n";
+				if (path.size() == 0)
+					result.append("Er is geen path from ").append(i).append(" to ").append(j).append("\n");
 				else
-					result += "Kortste pad van " + i  + " naar " + j  + " lengte = " + g.berekenLengte(pad) + " via : " + pad + "\n";
+					result.append("Shortest path from ").append(i).append(" to ").append(j).append(" lengte = ").append(g.calculateLength(path)).append(" via : ").append(path).append("\n");
 			}
-			result += "\n";
+			result.append("\n");
 		}
 		
 		System.out.println(result);
 	}
 
 	private static void printIntMatrix(int[][] matrix) {
-		String result = "p_matrix: \n";
-		for (int i = 0; i < matrix.length; i++) {
+		StringBuilder result = new StringBuilder("p_matrix: \n");
+		for (int[] ints : matrix) {
 			for (int j = 0; j < matrix.length; j++) {
-				result += (matrix[i][j] == infty ? "inf" : matrix[i][j]) + "\t";
+				result.append(ints[j] == infty ? "inf" : ints[j]).append("\t");
 			}
-			result += "\n";
+			result.append("\n");
 		}
-		result += "\n";
+		result.append("\n");
 		
 		System.out.println(result);		
 	}
 
 	private static void printDoubleMatrix(double[][] matrix) {
-		String result = "gewichtenmatrix: \n";
-		for (int i = 0; i < matrix.length; i++) {
+		StringBuilder result = new StringBuilder("gewichtenmatrix: \n");
+		for (double[] doubles : matrix) {
 			for (int j = 0; j < matrix.length; j++) {
-				result += (matrix[i][j] == infty ? "inf" : matrix[i][j]) + "\t";
+				result.append(doubles[j] == infty ? "inf" : doubles[j]).append("\t");
 			}
-			result += "\n";
+			result.append("\n");
 		}
-		result += "\n";
+		result.append("\n");
 		
 		System.out.println(result);
 	}

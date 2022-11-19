@@ -29,6 +29,5 @@ public class MyBFSUI {
 
         System.out.println(g.geefAncestors(start, destination));
         System.out.println(BreadthFirstSearchUI.zetPadOmNaarString(start, destination, g.findPath(start, destination)));
-
     }
 }

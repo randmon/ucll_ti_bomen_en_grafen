@@ -1,8 +1,8 @@
 package domain.model;
 
 public class Vak implements Comparable<Vak> {
-    private String naam;
-    private int aantalStudiepunten;
+    private final String naam;
+    private final int aantalStudiepunten;
 
     public Vak(String naam, int aantalStudiepunten) {
         if (naam == null || naam.trim().isEmpty()) {

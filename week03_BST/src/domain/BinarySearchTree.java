@@ -3,11 +3,6 @@ package domain;
 import java.util.ArrayList;
 
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
-
-	public BinarySearchTree(E data, BinarySearchTree<E> leftTree, BinarySearchTree<E> rightTree) {
-		super(data, leftTree, rightTree);
-	}
-
 	public BinarySearchTree(E data) {
 		super(data);
 	}
@@ -41,7 +36,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	}
 
 	@Override
-	public boolean removeNode(E data){
+	public boolean removeNode(E data) {
 		if (data == null) throw new IllegalArgumentException();
 		int result = data.compareTo(this.data);
 		boolean deleted;
@@ -49,13 +44,13 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 			if (this.isLeaf()) {
 				this.data = null;
 			} else if (leftTree != null) {
-				E grootsteLinks = leftTree.searchGreatest();
-				this.data = grootsteLinks;
-				leftTree.removeNode(grootsteLinks);
+				E greatestLeft = leftTree.searchGreatest();
+				this.data = greatestLeft;
+				leftTree.removeNode(greatestLeft);
 			} else {
-				E kleinsteRechts = rightTree.searchSmallest();
-				this.data = kleinsteRechts;
-				rightTree.removeNode(kleinsteRechts);
+				E smallestRight = rightTree.searchSmallest();
+				this.data = smallestRight;
+				rightTree.removeNode(smallestRight);
 			}
 			deleted = true;
 		}
@@ -71,12 +66,12 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 	}
 
 	@Override
-	public E searchSmallest(){
+	public E searchSmallest() {
 		return leftTree == null ? data : leftTree.searchSmallest();
 	}
 
 	@Override
-	public E searchGreatest(){
+	public E searchGreatest() {
 		return rightTree == null ? data : rightTree.searchGreatest();
 	}
 
@@ -85,10 +80,11 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 		if (data == null) throw new IllegalArgumentException();
 		int result = data.compareTo(this.data);
 		ArrayList<E> path = new ArrayList<>();
+
 		if (result == 0) {
 			path.add(data);
 			return path;
-		} else if (result < 0){
+		} else if (result < 0) {
 			ArrayList<E> left = leftTree == null ? null : leftTree.getPath(data);
 			if (left != null && left.get(0) != null) path.addAll(left);
 		} else {

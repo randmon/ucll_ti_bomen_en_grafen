@@ -25,5 +25,4 @@ public class UiDijkstra {
 		Graph g = new Graph(gewichtenMatrix);
 		System.out.println(g.berekenPaden(1));
 	}
-
 }

@@ -17,8 +17,10 @@ public class Oefening3 {
 
         System.out.println("Preorder:");
         boom.printPreorder();
+
         System.out.println("\nPostorder:");
         boom.printPostorder();
+
         System.out.println("\nInorder");
         boom.printInorder();
     }
