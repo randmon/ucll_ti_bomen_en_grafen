@@ -531,9 +531,21 @@ public boolean removeNode(E data) {
 		}
 	} else {
 		if (this.data.compareTo(data) > 0) {//zoek in linkerboom
-			return (this.leftTree == null ? false : this.leftTree.removeNode(data));
+			if (this.leftTree == null){
+				return false;
+			} else {
+				boolean result = this.leftTree.removeNode(data);
+				this.leftTree.cleanUp();
+				return result;
+			}
 		} else {//zoek in rechterboom
-			return (this.rightTree == null ? false : this.rightTree.removeNode(data));
+			if (this.rightTree == null){
+				return false;
+			} else {
+				boolean result = this.rightTree.removeNode(data);
+				this.rightTree.cleanUp();
+				return result;
+			}
 		}
 	}
 }
@@ -1879,7 +1891,7 @@ $8$ & 18 & $3 \rightarrow 1 \rightarrow 4 \rightarrow 8$ \\
 \bottomrule
 \end{tabular}
 \end{Oplossing}
-\begin{Oplossing}{9.4}
+\begin{Oplossing}{9.3}
 \begin{lstlisting}[caption={Dijkstra}, label=Dijkstra]
 private int getAantalKnopen() {
     return gewichtenMatrix.length;
@@ -1946,7 +1958,7 @@ public int[][] Dijkstra(int vanKnoop) {
 }
 \end{lstlisting}
 \end{Oplossing}
-\begin{Oplossing}{9.5}
+\begin{Oplossing}{9.4}
 \begin{lstlisting}[caption=vindPad, label=DijkstravindPad]
 private ArrayList<Integer> vindPad(int vanKnoop, int naarKnoop, int[][] res) {
     ArrayList<Integer> pad = new ArrayList<>();
@@ -2071,4 +2083,44 @@ Vervolgens roepen we een helper functie op die dat de verdeling zal maken. Deze 
 \end{Oplossing}
 \begin{Oplossing}{10.10}
 
+\end{Oplossing}
+\begin{Oplossing}{11.1}
+\(O(n)\)
+\end{Oplossing}
+\begin{Oplossing}{11.2}
+\(O(log(n))\)
+\end{Oplossing}
+\begin{Oplossing}{11.3}
+\(O(n^2)\)
+\end{Oplossing}
+\begin{Oplossing}{11.4}
+voor k = 1: \(O(n)\) en
+voor K heel groot: \(O(log_k(n))\)
+\end{Oplossing}
+\begin{Oplossing}{11.5}
+\(O(n^5)\)
+\end{Oplossing}
+\begin{Oplossing}{11.6}
+\(O(n^3)\)
+\end{Oplossing}
+\begin{Oplossing}{11.7}
+\begin{enumerate}
+\item Zoeken: \(O(n)\)
+\item Toevoegen: \(O(n)\)
+\item Verwijderen: \(O(n)\)
+\end{enumerate}
+\end{Oplossing}
+\begin{Oplossing}{11.8}
+\begin{enumerate}
+\item Zoeken: \(O(n)\)
+\item Toevoegen: \(O(n)\)
+\item Verwijderen: \(O(n)\)
+\end{enumerate}
+\end{Oplossing}
+\begin{Oplossing}{11.9}
+\begin{enumerate}
+\item Zoeken: \(O(h)\), met \(h\) de hoogte van de boom
+\item Toevoegen: \(O(h)\), met \(h\) de hoogte van de boom
+\item Verwijderen: \(O(h)\), met \(h\) de hoogte van de boom
+\end{enumerate}
 \end{Oplossing}

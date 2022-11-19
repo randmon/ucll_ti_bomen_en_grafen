@@ -10,7 +10,9 @@ public class Graph {
     public static final int infty = Integer.MAX_VALUE;
 
     public Graph(int[][] matrix) {
-        if (!isGeldigeVerbindingsMatrix(matrix)) throw new IllegalArgumentException("No valid verbindingsmatrix");
+        if (!isGeldigeVerbindingsMatrix(matrix))
+            throw new IllegalArgumentException("No valid verbindingsmatrix");
+
         this.verbindingsMatrix = matrix.clone();
     }
 
@@ -43,6 +45,7 @@ public class Graph {
         initArray(ancestors, infty);
 
         Queue<Integer> queue = new LinkedList<>();
+        // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Queue.html
         queue.add(start);
         ancestors[start - 1] = 0;
 
@@ -86,6 +89,7 @@ public class Graph {
 
         if (ouder == 0) path.add(0, destination);
         return path;
+
     }
 
     private void initArray(int[] array, int value) {
@@ -95,12 +99,12 @@ public class Graph {
 
     // methode om tussenliggend resultaat te kunnen schrijven naar het scherm
     public String geefAncestors(int start, int destination) {
-        String res = "Ancestors van " + start + " naar " + destination + ":\n";
+        StringBuilder res = new StringBuilder("Ancestors van " + start + " naar " + destination + ":\n");
         int[] ancestors = this.findAncestors(start, destination);
         for (int ancestor : ancestors) {
-            res += ancestor != infty ? ancestor + " " : "infty" + " ";
+            res.append(ancestor != infty ? ancestor + " " : "infty" + " ");
         }
-        return res;
+        return res.toString();
     }
 
     public int[][] getVerbindingsMatrix() {
